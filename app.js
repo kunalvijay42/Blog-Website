@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost:27017/blogDB", {useNewUrlParser: true});
+mongoose.connect("mongodb+srv://admin-kunal:test123@cluster0.0mx8qku.mongodb.net/blogDB", { useNewUrlParser: true });
 
 const postSchema = {
   title: String,
@@ -39,7 +39,7 @@ app.get("/compose", function(req, res){
 });
 
 app.post("/compose", function(req, res){
-  
+
   const post = new Post ({
     title: req.body.postTitle,
     content: req.body.postBody
