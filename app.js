@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
@@ -16,9 +17,12 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static("public"));
 
-//mongoose.connect("mongodb+srv://" + Username +":" + Password + "@cluster0.0mx8qku.mongodb.net/blogDB", { useNewUrlParser: true });
+//console.log(process.env.USERNAMEE);
+//console.log(process.env.PASSWORD)
 
-mongoose.connect("mongodb://localhost:27017/blogDB", { useNewUrlParser: true });
+mongoose.connect("mongodb+srv://" + process.env.USERNAMEE + ":" + process.env.PASSWORD + "@cluster0.0mx8qku.mongodb.net/blogDB", { useNewUrlParser: true });
+
+//mongoose.connect("mongodb://localhost:27017/blogDB", { useNewUrlParser: true });
 
 const postSchema = {
   title: String,
@@ -60,9 +64,9 @@ app.get("/posts/:postId", function(req, res){
 
   const requestedPostId = req.params.postId;
   
-    Post.findOne({_id: requestedPostId}, function(err, post){
+    Post.findOne({_id: requestedPostId}, function(err, post){    //output gets saved in post variable 
       res.render("post", {
-        title: post.title,
+        title: post.title,      //post has the result in form of title and content which we then assign to the variables 
         content: post.content
       });
     });
