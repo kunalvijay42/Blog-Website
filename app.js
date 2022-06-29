@@ -32,7 +32,7 @@ const postSchema = {
 const Post = mongoose.model("Post", postSchema);
 
 app.get("/", function(req, res){
-  Post.find({}, function(err, posts){
+  Post.find({}, function(err, posts){       //find is used for reading the data in the DB 
     res.render("home", {
       startingContent: homeStartingContent,
       posts: posts
